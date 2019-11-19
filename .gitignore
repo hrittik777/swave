@@ -4,7 +4,7 @@
 /utils/crypto-hash.test.js
 /wallet/index.test.js
 /wallet/transaction.test.js
-/wallet/transactionPool.test
+/wallet/transactionPool.test.js
 info.txt
 
 
