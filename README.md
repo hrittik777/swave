@@ -13,7 +13,7 @@
   2. Start Client in development mode: `npm run dev-client`
   
 ## Application Features and Functionality:
-  * The API offers functionality to create Wallets, make transactions, implements Proof of Work for mining blocks of transactions from the Transaction Pool and implements SHA256 hashing and Chain validation & replacement. The Applicationand supports up to 1000 peer nodes.
+  * The API offers functionality to create Wallets, make transactions, implements Proof of Work for mining blocks of transactions from the Transaction Pool and implements SHA256 hashing and Chain validation & replacement. The Application supports up to 1000 peer nodes.
    
   * The Front-end allows interacting with the system through various API calls.
-  *Detailed Documentation Coming Soon...*
+  *Detailed Documentation Coming Soon....*
