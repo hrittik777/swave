@@ -16,5 +16,5 @@ Note: App is currently deployed on Heroku free dynos, so pls give it some time t
 ## Application Features and Functionality:
   * The API offers functionality to create Wallets, make transactions, implements Proof of Work for mining blocks of transactions from the Transaction Pool and implements SHA256 hashing and Chain validation & replacement. The Application supports up to 1000 peer nodes using a PubSub architecture.
    
-  * The Front-end allows interacting with the system through various API calls.
+  * The Front-end allows interacting with the system through various API calls.  
   *Detailed Documentation Coming Soon....*
