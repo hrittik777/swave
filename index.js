@@ -8,6 +8,8 @@ const TransactionPool = require("./wallet/transactionPool");
 const Wallet = require("./wallet");
 const TransactionMiner = require("./app/transactionMiner");
 
+const isDevelopment = process.env.ENV === 'development';
+
 const app = express();
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "client/dist")));
@@ -110,23 +112,25 @@ const syncWithRootState = () => {
 
 // ------------------------------------------------------------------
 // seeding backend with transactions in a development environment:
-const walletOne = new Wallet();
-const walletTwo = new Wallet();
+if(isDevelopment) {
+	const walletOne = new Wallet();
+	const walletTwo = new Wallet();
 
-const generateWalletTransaction = ({ wallet, recipient, amount }) => {
-	const transaction = wallet.createTransaction({ recipient, amount, chain: blockchain.chain });
-	transactionPool.setTransaction(transaction);
-};
+	const generateWalletTransaction = ({ wallet, recipient, amount }) => {
+		const transaction = wallet.createTransaction({ recipient, amount, chain: blockchain.chain });
+		transactionPool.setTransaction(transaction);
+	};
 
-const walletTransaction = () => generateWalletTransaction({ wallet, recipient: walletOne.publicKey, amount: 5 });
-const walletOneTransaction = () => generateWalletTransaction({ wallet: walletOne, recipient: walletTwo.publicKey, amount: 10 });
-const walletTwoTransaction = () => generateWalletTransaction({ wallet: walletTwo, recipient: wallet.publicKey, amount: 15 });
+	const walletTransaction = () => generateWalletTransaction({ wallet, recipient: walletOne.publicKey, amount: 5 });
+	const walletOneTransaction = () => generateWalletTransaction({ wallet: walletOne, recipient: walletTwo.publicKey, amount: 10 });
+	const walletTwoTransaction = () => generateWalletTransaction({ wallet: walletTwo, recipient: wallet.publicKey, amount: 15 });
 
-for(let i = 0; i < 10; i++) {
-	if(i % 3 === 0) { walletTransaction(); walletOneTransaction(); }
-	else if(i % 3 === 1) { walletTransaction(); walletTwoTransaction(); }
-	else { walletOneTransaction(); walletTwoTransaction(); }
-	transactionMiner.mineTransactions();
+	for(let i = 0; i < 10; i++) {
+		if(i % 3 === 0) { walletTransaction(); walletOneTransaction(); }
+		else if(i % 3 === 1) { walletTransaction(); walletTwoTransaction(); }
+		else { walletOneTransaction(); walletTwoTransaction(); }
+		transactionMiner.mineTransactions();
+	}
 }
 
 // ------------------------------------------------------------------
@@ -135,7 +139,7 @@ if(process.env.GENERATE_PEER_PORT === 'true') {
 	PEER_PORT = DEFAULT_PORT + Math.ceil(Math.random() * 1000);
 }
 
-const PORT = PEER_PORT || DEFAULT_PORT;
+const PORT = process.env.PORT || PEER_PORT || DEFAULT_PORT;
 app.listen(PORT, () => {
 	console.log(`SWAVE server has started on port:${PORT}`);
 	if(PORT !== DEFAULT_PORT) {
