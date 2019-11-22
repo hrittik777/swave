@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "client/dist")));
 
 const DEFAULT_PORT = 3000;
-const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
+const ROOT_NODE_ADDRESS = isDevelopment ? `http://localhost:${DEFAULT_PORT}`: `https://swave.herokuapp.com`;
 
 const blockchain = new Blockchain();
 const transactionPool = new TransactionPool();
