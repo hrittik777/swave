@@ -1,6 +1,7 @@
 # 🐼Swave
 
-### A Blockchain-based Cryptocurrency built using NodeJS, Express and React
+### A Blockchain-based Cryptocurrency built using NodeJS, Express and React: https://swave.herokuapp.com/
+Note: App is currently deployed on Heroku free dynos, so pls give it some time to build ¯\_(ツ)_/¯
 
 ## Usage:
 #### SERVER:
